@@ -1,13 +1,19 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
+import { AnimalCard } from './AnimalCard'
 import { getAllAnimals, getAnimalById } from "../../modules/AnimalManager.js"
 
 export const AnimalList = () => {
+    const [animals, setAnimals] = useState([])
+    
     const getAnimals = () => {
-        return getAllAnimas().then(animalsFromAPI => {
+        return getAllAnimals().then(animalsFromAPI => {
             console.log(animalsFromAPI)
         })
     }
-    const [animals, setAnimals] = useState([])
+
+    useEffect(() => {
+        getAnimals();
+    }, []);
 
     return(
         <div className="container-cards">
