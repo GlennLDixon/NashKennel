@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import { LocationCard } from './locationCard.js'
+import { LocationCard } from './LocationCard.js'
 import { deleteLocation, getAllLocations, getlocationById } from "../../modules/LocationManager.js"
 
 export const LocationList = () => {
