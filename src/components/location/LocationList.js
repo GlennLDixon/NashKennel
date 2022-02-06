@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react"
 import { LocationCard } from './locationCard.js'
-import { getAllLocations, getlocationById } from "../../modules/LocationManager.js"
-import { deleteEmployee } from "../../modules/EmployeeManager.js"
+import { deleteLocation, getAllLocations, getlocationById } from "../../modules/LocationManager.js"
 
 export const LocationList = () => {
     const [locations, setLocations] = useState([])
@@ -12,9 +11,9 @@ export const LocationList = () => {
         })
     }
 
-    const handleDeleteEmployee = id => {
-        deleteEmployee(id)
-        .then(() => getAllEmployees().then(setEmployees));
+    const handleDeleteLocation = id => {
+        deleteLocation(id)
+        .then(() => getAllLocations().then(setLocations));
     };
 
     useEffect(() => {
@@ -27,7 +26,7 @@ export const LocationList = () => {
                 <LocationCard 
                 key={location.id} 
                 location={location} 
-                handleDeleteEmployee={handleDeleteEmployee}/>
+                handleDeleteLocation={handleDeleteLocation}/>
                 )}
         </div>
     )
