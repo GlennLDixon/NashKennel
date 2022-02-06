@@ -1,18 +1,18 @@
 import React from "react"
 import "./Location.css"
 
-export const LocationCard = () => {
+export const LocationCard = ({location, handleDeleteLocation}) => {
     return (
         <div className="card">
             <div className="card-content">
                 <picture>
                     {/* <img src={'/images/dog.svg'} alt="My Dog" /> */}
                 </picture>
-                <h3>Name: <span className="card-petname">
-                {animal.name}
+                <h3>Name: <span className="card-locationname">
+                {location.name}
                 </span></h3>
-                <p>Breed: {animal.breed}</p>
-                <button type="button" onClick={() => handleDeleteAnimal(animal.id)}>Discharge</button>
+                <p>Location: {location.name}</p>
+                <button type="button" onClick={() => handleDeleteLocation(location.id)}>Discharge</button>
             </div>
         </div>
     )
