@@ -1,7 +1,7 @@
 import React from "react"
 import "./Customer.css"
 
-export const CustomerCard = () => {
+export const CustomerCard = ({customer, handleDeleteCustomer}) => {
     return (
         <div className="card">
             <div className="card-content">
