@@ -1,7 +1,13 @@
 const remoteURL = 'http://localhost:8088'
 
+export const getAllCustomerById = (customerId) => {
+    return fetch(`${remoteURL}/customers/${customerId}`)
+    .then(res => res.json())
+} 
+
 export const getAllCustomers = () => {
-    return fetch(`${remoteURL}/customers`).then(res => res.json())
+    return fetch(`${remoteURL}/customers`)
+    .then(res => res.json())
 } 
 
 export const deleteCustomer = (id) => {
