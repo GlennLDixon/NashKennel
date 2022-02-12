@@ -1,6 +1,6 @@
 const remoteURL = 'http://localhost:8088'
 
-export const getAllCustomerById = (customerId) => {
+export const getCustomerById = (customerId) => {
     return fetch(`${remoteURL}/customers/${customerId}`)
     .then(res => res.json())
 } 
