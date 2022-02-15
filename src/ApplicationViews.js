@@ -1,5 +1,4 @@
 import React from "react"
-import { Route, Routes } from "react-router-dom"
 import { Home } from "./Home"
 import { CustomerList } from "./components/customer/CustomerList"
 import { EmployeeList } from "./components/employee/EmployeeList"
@@ -9,18 +8,38 @@ import { AnimalDetail } from "./components/animal/AnimalDetail"
 import { LocationDetail } from "./components/location/LocationDetail"
 import { EmployeeDetail } from "./components/employee/EmployeeDetail"
 import { CustomerDetail } from "./components/customer/CustomerDetail"
+import { AnimalForm } from './components/animal/AnimalForm'
+import { Route, Routes, Navigate } from 'react-router-dom'
+import { Login } from './components/auth/Login'
+import { Register } from './components/auth/Register'
 
 
-export const ApplicationViews = () => {
+export const ApplicationViews = ( {isAuthenticated, setIsAuthenticated }) => {
+    const PrivateRoute = ({ children }) => {
+        return isAuthenticated ? children : <Navigate to="/login" />;
+    }
+    
+    const setAuthUser = (user) => {
+        sessionStorage.setItem("kennel_customer", JSON.stringify(user))
+        setIsAuthenticated(sessionStorage.getItem("kennel_customer") !== null)
+    }
+
     return (
         <>
             <Routes>
                 {/* Render the location list when http://localhost:3000/ */}
                 <Route exact path="/" element={<Home />} />
+                <Route exact path="/login" element={<Login setAuthUser={setAuthUser} />} />
+                <Route exact path="/register" element={<Register />} />
 
                 {/* Render the animal list when http://localhost:3000/animals */}
-                <Route path="/animals" element={<AnimalList />} />
+                <Route path="/animals" element={
+                    <PrivateRoute>
+                        <AnimalList />
+                    </PrivateRoute>
+                }/>
                 <Route path="/animals/:animalId" element={<AnimalDetail />} />
+                <Route path="/animals/create" element={<AnimalForm />} />
                 
                 {/* Render the animal list when http://localhost:3000/animals */}
                 <Route path="/customers" element={<CustomerList />} />
