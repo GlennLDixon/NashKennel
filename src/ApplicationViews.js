@@ -9,6 +9,7 @@ import { LocationDetail } from "./components/location/LocationDetail"
 import { EmployeeDetail } from "./components/employee/EmployeeDetail"
 import { CustomerDetail } from "./components/customer/CustomerDetail"
 import { AnimalForm } from './components/animal/AnimalForm'
+import { AnimalEditForm } from './components/animal/AnimalEditForm'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import { Login } from './components/auth/Login'
 import { Register } from './components/auth/Register'
@@ -38,7 +39,16 @@ export const ApplicationViews = ( {isAuthenticated, setIsAuthenticated }) => {
                         <AnimalList />
                     </PrivateRoute>
                 }/>
-                <Route path="/animals/:animalId" element={<AnimalDetail />} />
+                <Route path="/animals/:animalId/edit" element={
+                    <PrivateRoute>
+                        <AnimalEditForm />
+                    </PrivateRoute>
+                } />
+                <Route exact path="/animals/:animalId" element={
+                    <PrivateRoute>
+                        <AnimalDetail />
+                    </PrivateRoute>
+                } />
                 <Route path="/animals/create" element={<AnimalForm />} />
                 
                 {/* Render the animal list when http://localhost:3000/animals */}
