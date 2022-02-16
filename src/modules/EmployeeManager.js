@@ -14,3 +14,13 @@ export const deleteEmployee = (id) => {
         method: "DELETE"
     }).then(result => result.json())
 }
+
+export const addEmployee = (newEmployee) => {
+    return fetch(`${remoteURL}/employees`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newEmployee)
+    }).then(response => response.json())
+}
