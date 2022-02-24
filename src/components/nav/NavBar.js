@@ -30,6 +30,11 @@ export const NavBar = ({ clearUser, isAuthenticated }) => {
                 : null}
             {isAuthenticated
                 ? <li className="navbar__item">
+                    <Link className="navbar__link" to="/customers"> Customers </Link>
+                </li>
+                : null}
+            {isAuthenticated
+                ? <li className="navbar__item">
                     <Link className="navbar__link" to="/owners"> Owners </Link>
                 </li>
                 : null}

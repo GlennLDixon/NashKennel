@@ -1,34 +1,53 @@
-import React, {useEffect, useState} from "react"
-import { EmployeeCard } from './EmployeeCard.js'
-import { deleteEmployee, getAllEmployees, getEmployeeById } from "../../modules/EmployeeManager.js"
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+//import the components we will need
+import { EmployeeCard } from './EmployeeCard';
+import { getAllEmployees, getEmployeeById, deleteEmployee } from '../../modules/EmployeeManager';
 
 export const EmployeeList = () => {
-    const [employees, setEmployees] = useState([])
-    
-    const getEmployees = () => {
-        return getAllEmployees().then(employeesFromAPI => {
-            setEmployees(employeesFromAPI)
-        })
-    }
+  // The initial state is an empty array
+  const [employees, setEmployees] = useState([]);
+  const navigate = useNavigate();
 
-    const handleDeleteEmployee = id => {
-        deleteEmployee(id)
-        .then(() => getAllEmployees().then(setEmployees));
-    };
+  const getEmployees = () => {
+    // After the data comes back from the API, we
+    //  use the setAnimals function to update state
+    return getAllEmployees().then(employeesFromAPI => {
+      setEmployees(employeesFromAPI)
+    });
+  };
 
-    useEffect(() => {
-        getEmployees();
-    }, []);
 
-    return(
-        <div className="container-cards">
-            {employees.map(employee => 
-                <EmployeeCard 
-                key={employee.id} 
-                employee={employee}
-                handleDeleteEmployee={handleDeleteEmployee}/>
-                )}
-        </div>
-    )
+  const handleDeleteEmployee = id => {
+    deleteEmployee(id)
+    .then(() => getAllEmployees().then(setEmployees));
+  };
 
-}
+
+
+  // got the animals from the API on the component's first render
+  useEffect(() => {
+    getEmployees();
+  }, []);
+
+  // Finally we use .map() to "loop over" the animals array to show a list of animal cards
+  return (
+    <>
+      <section className="section-content">
+        <button type="button"
+          className="btn"
+          onClick={() => {navigate("/employees/create")}}>
+          Add Employee
+        </button>
+      </section>
+      <div className="container-cards">
+        {employees.map(employee => 
+        <EmployeeCard 
+        key={employee.id} 
+        employee={employee}
+        handleDeleteEmployee={handleDeleteEmployee} />)}
+      </div>
+    </>
+  );
+};

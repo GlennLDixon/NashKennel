@@ -14,7 +14,7 @@ export const EmployeeCard = ({employee, handleDeletEmployee}) => {
                 </span></h3>
                 <p>Location: {employee.location?.name}</p>
                 <button type="button" onClick={() => handleDeletEmployee(employee.id)}>Discharge</button>
-                <Link to={`/employees/${employee.id}`}>
+                <Link to={`/employees/${employee.id}/edit`}>
                     <button>Details</button>
                 </Link>
             </div>

@@ -16,7 +16,7 @@ export const deleteCustomer = (id) => {
     }).then(result => result.json())
 }
 
-export const addAnimalCustomer = (newCustomer) => {
+export const addCustomer = (newCustomer) => {
     return fetch(`${remoteURL}/customers`, {
         method: "POST",
         headers: {
